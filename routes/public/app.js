@@ -91,7 +91,7 @@ module.exports = function(app, passport) {
                         user_name: user.data.name,
                         user_room: user.data.room_number,
                         content: content
-                    });
+                    }); 
                     review.save(function(err) {
                         if (err) console.log(err);
 
