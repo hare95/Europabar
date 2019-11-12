@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+
+<head>
+  	<title>Europabar userlist</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<!-- Bootstrap dependencies -->
+    <script src="/static/js/jq.js"></script>
+    <link rel="stylesheet" href="/static/css/bootstrap-material.css">
+    <script src="/static/js/bootstrap-material.js"></script>
+
+		<link rel="stylesheet" href="/static/css/addon.css">
+
+    <!-- For loading -->
+    <script src="/static/js/loading-overlay.js"></script>
+
+    <link rel="stylesheet" href="/static/fontawesome/css/all.css">
+</head>
+
+<body class="bg-black">
+
+	<nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top navbar-fixed-top">
+        <div class="container">
+            <img src="/static/icons/main.png" width="30" height="30" class="d-inline-block align-top mr-1" alt="">
+            <a class="navbar-brand align-items-center d-flex" href="/">
+                Europabar
+            </a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-between" id="navbarNavAltMarkup">
+                <!-- Left items -->
+                <div class="navbar-nav mr-auto">
+                    <a class="nav-item nav-link text-black hover-white" href="/">Home</a>
+                    <a class="nav-item nav-link text-black hover-white" href="/all-users">Userlist</a>
+                    <a class="nav-item nav-link text-black hover-white" href="/profile">Profile</a>
+                    <a class="nav-item nav-link text-black hover-white" href="/login">Login</a>
+                    <a class="nav-item nav-link text-black hover-white" href="/signup">Signup</a>
+                    <a class="nav-item nav-link text-black hover-white" href="/logout">Logout</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto w-100" style="margin-top: 100px; margin-bottom: 150px;">
+        <h1 class="text-white d-block text-center mx-auto">Complete userlist</h1>
+
+        <div class="list-group">
+
+<%      if (users) {
+            users.forEach(function(user){ %>
+                <a class='list-group-item list-group-item-action active'>
+                    <p class='mb-1'>id: <%= user._id %>, name: <%= user.data.name %>, email: <%= user.credentials.email %>, age: <%= user.data.age %>, room: <%= user.data.room_number %></p>
+                    <br>
+                    <button type="button" class="btn btn-primary bg-danger" onclick="deleteAccount('<%= user._id %>')">Delete this account</button>
+                </a>
+                <hr class="separator">
+<%          });
+        } %>
+
+        </div>
+
+    </div>
+
+    <script type="text/javascript">
+        function deleteAccount(id) {
+            $.ajax({
+                url: "/delete-account",
+                type: "POST",
+                dataType: "json",
+                data: JSON.stringify({
+                    'id': id
+                }),
+                contentType: "application/json",
+                complete: function() {},
+                success: function(data) {
+                    if (data && data.success) {
+                        window.location.reload();
+                    }
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                    console.error(thrownError);
+                },
+            });
+        }
+    </script>
+
+</body>
+
+</html>

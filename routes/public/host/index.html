@@ -1,0 +1,247 @@
+<!doctype html>
+<html>
+
+<head>
+  	<title>Europabar</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<!-- Bootstrap dependencies -->
+    <script src="/static/js/jq.js"></script>
+    <link rel="stylesheet" href="/static/css/bootstrap-material.css">
+    <script src="/static/js/bootstrap-material.js"></script>
+
+		<link rel="stylesheet" href="/static/css/addon.css">
+
+    <!-- For loading -->
+    <script src="/static/js/loading-overlay.js"></script>
+
+    <link rel="stylesheet" href="/static/fontawesome/css/all.css">
+</head>
+
+<body class="bg-black">
+
+	<nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top navbar-fixed-top">
+        <div class="container">
+            <img src="/static/icons/main.png" width="30" height="30" class="d-inline-block align-top mr-1" alt="">
+            <a class="navbar-brand align-items-center d-flex" href="/">
+                Europabar
+            </a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-between" id="navbarNavAltMarkup">
+                <!-- Left items -->
+                <div class="navbar-nav mr-auto">
+                    <a class="nav-item nav-link text-black hover-white" href="/">Home</a>
+                    <a class="nav-item nav-link text-black hover-white" href="/all-users">Userlist</a>
+                    <a class="nav-item nav-link text-black hover-white" href="/profile">Profile</a>
+                    <a class="nav-item nav-link text-black hover-white" href="/login">Login</a>
+                    <a class="nav-item nav-link text-black hover-white" href="/signup">Signup</a>
+                    <a class="nav-item nav-link text-black hover-white" href="/logout">Logout</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto w-100" style="margin-top: 100px; margin-bottom: 150px;">
+        <h1 class="text-white d-block text-center mx-auto">Welcome to Europabar</h1>
+        <a href="/"><img src="/static/icons/main.png" class="rounded d-block align-top mx-auto mt-1" alt=""></a>
+
+        <br>
+        <br>
+        <br>
+
+        <h2 class="text-white d-block text-center mx-auto"><u>General information</u></h2>
+        <img style="max-width: 80%" class="d-block align-top mx-auto mt-1 mb-1" src="https://www.jams-hotel.com/wp-content/uploads/2019/06/jams_munich_bar_10w_1920.jpg" alt="">
+        <ul>
+          <li><h4 class="text-white d-inline">Opening hours: Every Friday 9:30pm - open end</h4></li>
+          <li><h4 class="text-white d-inline">Happy hour: 9:30pm - 10:30pm</h4></li>
+        </ul>
+
+        <br>
+        <br>
+
+        <h2 class="text-white d-block text-center mx-auto"><u>Beers</u></h2>
+        <img style="max-width: 80%"  class="d-block align-top mx-auto mt-1 mb-1" src="https://timedotcom.files.wordpress.com/2018/04/national-beer-day-ipa.jpg?w=800&quality=85" alt="">
+        <ul>
+          <li><h4 class="text-white d-inline">Chiemseer: 1.50 €</h4></li>
+          <li><h4 class="text-white d-inline">Hanser: 1.00 €</h4></li>
+        </ul>
+
+        <br>
+        <br>
+
+        <h2 class="text-white d-block text-center mx-auto"><u>Shots</u></h2>
+        <img style="max-width: 80%"  class="d-block align-top mx-auto mt-1 mb-1" src="https://static.vinepair.com/wp-content/uploads/2015/11/history-shot-social.jpg" alt="">
+        <ul>
+          <li><h4 class="text-white d-inline">All shots: 1.00 €</h4></li>
+        </ul>
+
+        <br>
+        <br>
+
+        <h2 class="text-white d-block text-center mx-auto"><u>Longdrinks</u></h2>
+        <img style="max-width: 80%"  class="d-block align-top mx-auto mt-1 mb-1" src="https://cdn.gutekueche.de/upload/rezept_art/250/longdrink.jpg" alt="">
+        <ul>
+          <li><h4 class="text-white d-inline">All longdrinks: 2.50 €</h4></li>
+        </ul>
+
+        <hr style="border-color: white; background-color: white; color: white">
+
+        <div class="card bg-outer-card border border-white text-white mb-5 p-3 mx-auto" style="max-width: 100rem;">
+            <h1 class="text-white d-block text-center mx-auto">User reviews</h1>
+
+            <hr style="border-color: white; background-color: white; color: white">
+            <hr style="border-color: white; background-color: white; color: white">
+
+            <div id="reviews"></div>
+
+            <div class="card bg-white border border-black text-black mb-5 mx-auto" style="max-width: 80rem;">
+                <div class="card-header"><h1 class="mx-auto text-center"><i class="fas fa-plus"></i> Add review</h1></div>
+                <div class="card-body mx-auto text-center">
+
+                    <form action="/post-review" method="post" id="post_form" class="needs-validation" novalidate>
+                        <div class="form-group">
+                            <input type="text" class="form-control text-black" name="title" id="title" placeholder="Review title" required>
+                            <div class="invalid-feedback">
+                                Please provide a valid title.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <textarea rows="8" name="content" id="content" class="form-control text-black" placeholder="Review content" required></textarea>
+                            <div class="invalid-feedback">
+                                Please provide a valid content.
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-dark bg-success text-white" id="post-review">Post review</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script type="text/javascript">
+        var container = $('#reviews');
+
+        //Request reviews through ajax
+        $.ajax({
+            url: "/get-reviews",
+            type: "POST",
+            dataType: "json",
+            data: JSON.stringify({}),
+            contentType: "application/json",
+            complete: function() {},
+            success: function(data) {
+                if (data && data.reviews) {
+                    console.log(data.reviews);
+                    data.reviews.forEach(function(review){
+                      var toAdd = "" +
+                          "<div>" +
+                          "    <h3 class='text-white d-block text-center mx-auto'>" + review.post.title + "</h3>" +
+                          "    <h5 class='text-white d-block text-left'>Review by: " + review.user.name + " (room: " + review.user.room + ", id: " + review.user.id + ")</h5>" +
+                          "    <p>" + review.post.content + "</p>" +
+                          "    <div class='list-group'>";
+
+                      if (review.answers) {
+                          review.answers.forEach(function(answer) {
+                              toAdd += "" +
+                                  "<a class='list-group-item list-group-item-action active'>" +
+                                  "    <div class='d-flex w-100 justify-content-between'>" +
+                                  "        <h5 class='mb-1'>" + answer.user_name + "</h5>" +
+                                  "        <small>Room: " + answer.user_room + ", id: " + answer.user_id + "</small>" +
+                                  "    </div>" +
+                                  "    <p class='mb-1'>" + answer.content + "</p>" +
+                                  "</a>" +
+                                  "<hr class='separator'>";
+                          });
+                      }
+
+                      toAdd += "" +
+                          "    </div>" +
+                          "    <textarea rows='4' name='review_text_" + review._id + "' id='review_text_" + review._id + "' class='form-control text-white' placeholder='Your answer'></textarea><br>" +
+                          "    <button type='button' class='btn btn-dark bg-success text-white' id='review_button_" + review._id + "' onclick='postAnswer(\"" + review._id + "\")'>Post answer</button>" +
+                          "</div>" +
+                          "<hr style='border-color: white; background-color: white; color: white'>";
+
+                        container.append(toAdd);
+                    });
+                }
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                console.error(thrownError);
+            },
+        });
+
+        //Function called to answer review
+        function postAnswer(id) {
+            //Send data via ajax to server
+            $.ajax({
+                url: "/post-answer",
+                type: "POST",
+                dataType: "json",
+                data: JSON.stringify({
+                    "id": id,
+                    content: $('#review_text_' + id).val(),
+                }),
+                contentType: "application/json",
+                complete: function() {},
+                success: function(data) {
+                    if (data && data.success) {
+                        window.location.reload();
+                    }
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                    console.error(thrownError);
+                },
+            });
+        }
+
+        (function() {
+            'use strict';
+
+            window.addEventListener('load', function() {
+                //Submit button
+                var form = $('#post_form');
+                form.submit(function(event){
+                    event.preventDefault();
+                    if (form[0].checkValidity() === false) {
+                        event.stopPropagation();
+                    } else {
+                        form.LoadingOverlay("show", {
+                            text: "Checking your data...",
+                            textResizeFactor: 0.2,
+														zIndex: 1
+                        });
+
+                        //Send data via ajax to server
+                        $.ajax({
+                            url: "/post-review",
+                            type: "POST",
+                            dataType: "json",
+                            data: JSON.stringify({
+                                title: $('#title').val(),
+                                content: $('#content').val(),
+                            }),
+                            contentType: "application/json",
+                            complete: function() {},
+                            success: function(data) {
+                                if (data && data.success) {
+                                    window.location.reload();
+                                }
+                            },
+                            error: function(xhr, ajaxOptions, thrownError) {
+                                console.error(thrownError);
+                            },
+                        });
+                    }
+                    form.addClass('was-validated');
+                });
+            }, false);
+        })();
+    </script>
+
+</body>
+</html>
