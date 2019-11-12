@@ -24,5 +24,3 @@ Als Datenbank haben wir die MongoDB (mLab) verwendet.
 _________________________
 
 Mittels der ServerRoot.js wird der Server gestartet (mit dem Shortcut Alt+r). Hierfür wird das Package "atom-runner" benötigt.
-
-Der Ordner "node_modules" wurde nicht mit hochgeladen. In der package.json Datei stehen die verwendeten node-modules.
