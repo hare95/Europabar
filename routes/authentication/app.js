@@ -80,7 +80,7 @@ module.exports = function(app, passport) {
       if (err) console.log(err);
 
       res.json({
-        "success": true
+        "success": true 
       });
     });
   });
