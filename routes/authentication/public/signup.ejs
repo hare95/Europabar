@@ -1,0 +1,212 @@
+<!doctype html>
+<html>
+
+<head>
+  	<title>Europabar signup</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<!-- Bootstrap dependencies -->
+    <script src="/static/js/jq.js"></script>
+    <link rel="stylesheet" href="/static/css/bootstrap-material.css">
+    <script src="/static/js/bootstrap-material.js"></script>
+
+		<!-- Google font -->
+		<link href="/static/css/source-sans-pro.css" rel="stylesheet">
+
+    <!-- For form validation -->
+    <script src="/static/js/jq-validate.js"></script>
+
+    <!-- For loading -->
+    <script src="/static/js/loading-overlay.js"></script>
+
+		<link rel="stylesheet" href="/static/css/addon.css">
+
+    <link rel="stylesheet" href="/static/fontawesome/css/all.css">
+</head>
+
+<body class="bg-black">
+
+	<nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top navbar-fixed-top">
+        <div class="container">
+						<img src="/static/icons/main.png" width="30" height="30" class="d-inline-block align-top mr-1" alt="">
+            <a class="navbar-brand align-items-center d-flex" href="/">
+                Europabar
+            </a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-between" id="navbarNavAltMarkup">
+                <!-- Left items -->
+                <div class="navbar-nav mr-auto">
+                    <a class="nav-item nav-link text-black hover-white" href="/">Home</a>
+                    <a class="nav-item nav-link text-black hover-white" href="/all-users">Userlist</a>
+                    <a class="nav-item nav-link text-black hover-white" href="/profile">Profile</a>
+                    <a class="nav-item nav-link text-black hover-white" href="/login">Login</a>
+                    <a class="nav-item nav-link text-black hover-white" href="/signup">Signup</a>
+                    <a class="nav-item nav-link text-black hover-white" href="/logout">Logout</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container" style="margin-top: 100px">
+
+        <div class="card bg-outer-card border border-white text-white mb-5 mx-auto" style="max-width: 60rem;">
+            <div class="card-header"><h1 class="mx-auto text-center"><i class="fas fa-sign-in"></i> Signup</h1></div>
+            <div class="card-body mx-auto text-center">
+
+                <form action="/signup" method="post" id="signup_form" class="needs-validation" novalidate>
+                    <div class="form-group">
+                        <input type="email" class="form-control text-white" name="email" id="email" placeholder="Your email" required>
+                        <div class="invalid-feedback">
+                            Please provide a valid email.
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group" id="show_hide_password" required>
+                            <input type="password" class="form-control text-white" name="password" id="password" placeholder="Your password" data-toggle="password" required>
+                            <div class="input-group-addon">
+                                <a href="#"><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
+                            </div>
+                            <div class="invalid-feedback">
+                                Please provide a valid password.
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr style="border-color: black">
+
+                    <div class="form-group">
+                        <input type="text" class="form-control text-white" name="name" id="name" placeholder="Your name" required>
+                        <div class="invalid-feedback">
+                            Please provide your name.
+                        </div>
+                    </div>
+										<div class="form-group">
+                        <input type="number" class="form-control text-white" name="age" id="age" placeholder="Your age" required>
+                        <div class="invalid-feedback">
+                            Please provide your age.
+                        </div>
+                    </div>
+										<div class="form-group">
+                        <input type="text" class="form-control text-white" name="room_number" id="room_number" placeholder="Your room number" required>
+                        <div class="invalid-feedback">
+                            Please provide your room number.
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-dark bg-success text-white">Signup</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Error Modal -->
+    <div class="modal animated fadeInDown" id="error_modal">
+        <div class="modal-dialog">
+            <div class="modal-content bg-warning">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title text-white">Error</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <!-- Modal body -->
+                <div id="error_modal_text" class="modal-body text-white"></div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary bg-light" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal animated fadeInDown" id="success_modal">
+        <div class="modal-dialog">
+            <div class="modal-content bg-success">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Success</h4>
+                    <button type="button" class="close" data-dismiss="modal" onclick="window.location.href = '/login'">&times;</button>
+                </div>
+                <!-- Modal body -->
+                <div id="success_modal_text" class="modal-body"></div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary bg-light" data-dismiss="modal" onclick="window.location.href = '/login'">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function() {
+            'use strict';
+
+            //Password show / hide
+            $("#show_hide_password a").on('click', function(event) {
+                event.preventDefault();
+                if($('#show_hide_password input').attr("type") == "text"){
+                    $('#show_hide_password input').attr('type', 'password');
+                    $('#show_hide_password i').addClass( "fa-eye-slash" );
+                    $('#show_hide_password i').removeClass( "fa-eye" );
+                }else if($('#show_hide_password input').attr("type") == "password"){
+                    $('#show_hide_password input').attr('type', 'text');
+                    $('#show_hide_password i').removeClass( "fa-eye-slash" );
+                    $('#show_hide_password i').addClass( "fa-eye" );
+                }
+            });
+
+            window.addEventListener('load', function() {
+                //Submit button
+                var form = $('#signup_form')
+                form.submit(function(event){
+                    event.preventDefault();
+                    if (form[0].checkValidity() === false) {
+                        event.stopPropagation();
+                    } else {
+                        form.LoadingOverlay("show", {
+                            text: "Checking your data...",
+                            textResizeFactor: 0.2,
+														zIndex: 1
+                        });
+
+                        //Send data via ajax to server
+                        $.ajax({
+                            url: "/signup",
+                            type: "POST",
+                            dataType: "json",
+                            data: JSON.stringify({
+                                'email': $('#email').val(),
+                                'password': $('#password').val(),
+                                'name': $('#name').val(),
+																'age': $('#age').val(),
+																'room_number': $('#room_number').val(),
+                            }),
+                            contentType: "application/json",
+                            complete: function() {
+                                form.LoadingOverlay("hide");
+                            },
+                            success: function(data) {
+                                setTimeout(function() {
+                                    if (data.error && data.error.length > 0) {
+                                        $('#error_modal_text').html(data.error);
+                                        $('#error_modal').modal("show");
+                                    } else {
+                                        $('#success_modal_text').html(data.success);
+                                        $('#success_modal').modal("show");
+                                    }
+                                }, 700);
+                            },
+                            error: function(xhr, ajaxOptions, thrownError) {},
+                        });
+                    }
+                    form.addClass('was-validated');
+                });
+            }, false);
+        })();
+    </script>
+
+</body>
+</html>

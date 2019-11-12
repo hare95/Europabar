@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+
+<head>
+  	<title>Europabar profile</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<!-- Bootstrap dependencies -->
+    <script src="/static/js/jq.js"></script>
+    <link rel="stylesheet" href="/static/css/bootstrap-material.css">
+    <script src="/static/js/bootstrap-material.js"></script>
+
+		<link rel="stylesheet" href="/static/css/addon.css">
+
+    <link rel="stylesheet" href="/static/fontawesome/css/all.css">
+</head>
+
+<body class="bg-black">
+
+	<nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top navbar-fixed-top">
+        <div class="container">
+            <img src="/static/icons/main.png" width="30" height="30" class="d-inline-block align-top mr-1" alt="">
+            <a class="navbar-brand align-items-center d-flex" href="/">
+                Europabar
+            </a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-between" id="navbarNavAltMarkup">
+
+                <div class="navbar-nav mr-auto">
+                    <a class="nav-item nav-link text-black hover-white" href="/">Home</a>
+                    <a class="nav-item nav-link text-black hover-white" href="/all-users">Userlist</a>
+                    <a class="nav-item nav-link text-black hover-white" href="/profile">Profile</a>
+                    <a class="nav-item nav-link text-black hover-white" href="/login">Login</a>
+                    <a class="nav-item nav-link text-black hover-white" href="/signup">Signup</a>
+                    <a class="nav-item nav-link text-black hover-white" href="/logout">Logout</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container" style="margin-top: 100px">
+
+        <div class="card bg-outer-card border border-white text-white mb-5 mx-auto" style="max-width: 60rem;">
+            <div class="card-header"><h1 class="mx-auto text-center"><i class="fas fa-user"></i> Profile</h1></div>
+            <div class="card-body mx-auto text-center">
+
+              <strong>Email: </strong> <%= user.credentials.email %> <br> <br>
+
+              <strong>Name: </strong> <%= user.data.name %> <br>
+              <strong>Age: </strong> <%= user.data.age %> <br>
+              <strong>Room number: </strong> <%= user.data.room_number %> <br>
+
+              <hr style="border-color: white; background-color: white; color: white">
+
+              <!-- Löschbutton -->
+              <button type="button" class="btn btn-primary bg-danger" onclick="deleteAccount()">Delete my account</button>
+
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        function deleteAccount(id) {
+            $.ajax({
+                url: "/delete-account",
+                type: "POST",
+                dataType: "json",
+                data: JSON.stringify({}),
+                contentType: "application/json",
+                complete: function() {},
+                success: function(data) {
+                    if (data && data.success) {
+                        window.location = "/logout";
+                    }
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                    console.error(thrownError);
+                },
+            });
+        }
+    </script>
+
+</body>
+</html>
